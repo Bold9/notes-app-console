@@ -40,6 +40,10 @@ fun runMenu() {
             2  -> listNotes()
             3  -> updateNote()
             4  -> deleteNote()
+            5  -> listActiveNotes()
+            6  -> listArchivedNotes()
+            7  -> numberOfArchivedNotes()
+            8  -> numberOfActiveNotes()
             0  -> exitApp()
             else -> System.out.println("Invalid option entered: ${option}")
 
@@ -81,3 +85,20 @@ fun exitApp(){
     exit(0)
 }
 
+fun listActiveNotes() {
+    noteAPI.listActiveNotes()
+}
+
+fun listArchivedNotes() {
+    noteAPI.listArchivedNotes()
+}
+
+fun numberOfArchivedNotes() {
+    //helper method to determine how many archived notes there are
+    noteAPI.numberOfArchivedNotes()
+}
+
+fun numberOfActiveNotes() {
+    //helper method to determine how many active notes there are
+    noteAPI.numberOfArchivedNotes()
+}
