@@ -9,6 +9,7 @@ group = "me.user"
 version = "1.0-SNAPSHOT"
 
 dependencies {
+    implementation("junit:junit:4.13.1")
     testImplementation(kotlin("test"))
     // dependencies for logging
     implementation("io.github.microutils:kotlin-logging:2.1.21")
