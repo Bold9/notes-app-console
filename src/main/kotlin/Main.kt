@@ -102,3 +102,13 @@ fun numberOfActiveNotes() {
     //helper method to determine how many active notes there are
     noteAPI.numberOfActiveNotes()
 }
+
+fun listNotesBySelectedPriority() {
+
+     noteAPI.listNotesBySelectedPriority()
+ }
+
+fun numberOfNotesByPriority() {
+    //helper method to determine how many notes there are of a specific priority
+    noteAPI.numberOfNotesByPriority()
+}
