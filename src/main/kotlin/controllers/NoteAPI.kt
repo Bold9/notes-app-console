@@ -55,14 +55,14 @@ class NoteAPI {
             var listOfNotes = ""
             for (i in notes.indices) {
                 if (!notes[i].isNoteArchived)
-                listOfNotes += "${i}: ${notes[i]} \n"
+                    listOfNotes += "${i}: ${notes[i]} \n"
             }
             listOfNotes
         }
     }
 
         fun listArchivedNotes(): String {
-            return if (numberOfArchivedNotes()==0) {
+            return if (numberOfArchivedNotes() == 0) {
                 "No Archived notes stored"
             } else {
                 var listOfNotes = ""
@@ -95,7 +95,44 @@ class NoteAPI {
         return counter
     }
 
+    fun listNotesBySelectedPriority(priority: Int): String {
+        return if (notes.isEmpty()) {
+            "No notes stored"
+        } else {
+            var listOfNotes = ""
+            for (i in notes.indices) {
+                if (notes[i].notePriority == priority) {
+                    listOfNotes +=
+                        """$i: ${notes[i]}
+                        """.trimIndent()
+                }
+            }
+            if (listOfNotes.equals("")) {
+                "No notes with priority: $priority"
+            } else {
+                "${numberOfNotesByPriority(priority)} notes with priority $priority: $listOfNotes"
+            }
+        }
     }
+
+         fun numberOfNotesByPriority(priority: Int)  : Int = notes.count { note: Note -> note.notePriority == priority }
+    fun listNotesBySelectedPriority() {
+        TODO("Not yet implemented")
+    }
+
+    fun numberOfNotesByPriority() {
+        TODO("Not yet implemented")
+    }
+    //helper method to determine how many notes there are of a specific priority
+
+        }
+
+
+
+
+
+
+
 
 
 
