@@ -100,5 +100,5 @@ fun numberOfArchivedNotes() {
 
 fun numberOfActiveNotes() {
     //helper method to determine how many active notes there are
-    noteAPI.numberOfArchivedNotes()
+    noteAPI.numberOfActiveNotes()
 }
