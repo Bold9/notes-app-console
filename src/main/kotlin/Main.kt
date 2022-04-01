@@ -4,6 +4,7 @@ import utils.ScannerInput
 import utils.ScannerInput.readNextInt
 import utils.ScannerInput.readNextLine
 import java.lang.System.exit
+
 //import deleteNote as deleteNote1
 
 
@@ -16,9 +17,9 @@ fun main(args: Array<String>) {
 private val noteAPI = NoteAPI()
 
 
-
-fun mainMenu() : Int {
-    return ScannerInput.readNextInt(""" 
+fun mainMenu(): Int {
+    return ScannerInput.readNextInt(
+        """ 
          > ----------------------------------
          > |        NOTE KEEPER APP         |
          > ----------------------------------
@@ -30,7 +31,8 @@ fun mainMenu() : Int {
          > ----------------------------------
          > |   0) Exit                      |
          > ----------------------------------
-         > ==>> """.trimMargin(">"))
+         > ==>> """.trimMargin(">")
+    )
 }
 
 fun runMenu() {
@@ -54,7 +56,7 @@ fun runMenu() {
 }
 
 
-fun addNote(){
+fun addNote() {
     //logger.info { "addNote() function invoked" }
     val noteTitle = readNextLine("Enter a title for the note: ")
     val notePriority = readNextInt("Enter a priority (1-low, 2, 3, 4, 5-high): ")
@@ -68,16 +70,35 @@ fun addNote(){
     }
 }
 
-fun listNotes(){
+fun listNotes() {
     //logger.info { "listNotes() function invoked" }
     println(noteAPI.listAllNotes())
 }
 
-fun updateNote(){
-    logger.info { "addNote() function invoked" }
+fun updateNote() {
+    //logger.info { "updateNotes() function invoked" }
+    listNotes()
+    if (noteAPI.numberOfNotes() > 0) {
+        //only ask the user to choose the note if notes exist
+        val indexToUpdate = readNextInt("Enter the index of the note to update: ")
+        if (noteAPI.isValidIndex(indexToUpdate)) {
+            val noteTitle = readNextLine("Enter a title for the note: ")
+            val notePriority = readNextInt("Enter a priority (1-low, 2, 3, 4, 5-high): ")
+            val noteCategory = readNextLine("Enter a category for the note: ")
+
+            //pass the index of the note and the new note details to NoteAPI for updating and check for success.
+            if (noteAPI.updateNote(indexToUpdate, Note(noteTitle, notePriority, noteCategory, false))) {
+                println("Update Successful")
+            } else {
+                println("Update Failed")
+            }
+        } else {
+            println("There are no notes for this index number")
+        }
+    }
 }
 
-fun deleteNote(){
+fun deleteNote() {
     //logger.info { "deleteNotes() function invoked" }
     listNotes()
     if (noteAPI.numberOfNotes() > 0) {
@@ -93,7 +114,7 @@ fun deleteNote(){
     }
 }
 
-fun exitApp(){
+fun exitApp() {
     println("Exiting...bye")
     exit(0)
 }
