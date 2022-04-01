@@ -4,6 +4,7 @@ import utils.ScannerInput
 import utils.ScannerInput.readNextInt
 import utils.ScannerInput.readNextLine
 import java.lang.System.exit
+//import deleteNote as deleteNote1
 
 
 private val logger = KotlinLogging.logger {}
@@ -36,15 +37,15 @@ fun runMenu() {
     do {
         val option = mainMenu()
         when (option) {
-            1  -> addNote()
-            2  -> listNotes()
-            3  -> updateNote()
-            4  -> deleteNote()
-            5  -> listActiveNotes()
-            6  -> listArchivedNotes()
-            7  -> numberOfArchivedNotes()
-            8  -> numberOfActiveNotes()
-            0  -> exitApp()
+            1 -> addNote()
+            2 -> listNotes()
+            3 -> updateNote()
+            4 -> deleteNote()
+            5 -> listActiveNotes()
+            6 -> listArchivedNotes()
+            7 -> numberOfArchivedNotes()
+            8 -> numberOfActiveNotes()
+            0 -> exitApp()
             else -> System.out.println("Invalid option entered: ${option}")
 
 
@@ -77,7 +78,19 @@ fun updateNote(){
 }
 
 fun deleteNote(){
-    logger.info { "addNote() function invoked" }
+    //logger.info { "deleteNotes() function invoked" }
+    listNotes()
+    if (noteAPI.numberOfNotes() > 0) {
+        //only ask the user to choose the note to delete if notes exist
+        val indexToDelete = readNextInt("Enter the index of the note to delete: ")
+        //pass the index of the note to NoteAPI for deleting and check for success.
+        val noteToDelete = noteAPI.deleteNote(indexToDelete)
+        if (noteToDelete != null) {
+            println("Delete Successful! Deleted note: ${noteToDelete.noteTitle}")
+        } else {
+            println("Delete NOT Successful")
+        }
+    }
 }
 
 fun exitApp(){
@@ -102,3 +115,5 @@ fun numberOfActiveNotes() {
     //helper method to determine how many active notes there are
     noteAPI.numberOfActiveNotes()
 }
+
+
