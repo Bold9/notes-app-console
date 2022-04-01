@@ -62,7 +62,7 @@ class NoteAPI {
     }
 
         fun listArchivedNotes(): String {
-            return if (numberOfArchivedNotes()==0) {
+            return if (numberOfArchivedNotes() == 0) {
                 "No Archived notes stored"
             } else {
                 var listOfNotes = ""
@@ -95,8 +95,12 @@ class NoteAPI {
         return counter
     }
 
+    fun deleteNote(indexToDelete: Int): Note? {
+        return if (isValidListIndex(indexToDelete, notes)) {
+            notes.removeAt(indexToDelete)
+        } else null
     }
-
+}
 
 
 
